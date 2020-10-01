@@ -26,4 +26,5 @@ io.on('connection', socket => {
   })
 })
 
-server.listen(3000)
+server.listen(3000 || process.env.PORT)
+console.log('Running on http://127.0.0.1:3000')
