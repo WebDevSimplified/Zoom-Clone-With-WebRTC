@@ -48,3 +48,4 @@ rm csr.pem
 ```bash
 npm run devStart
 ```
+And you can enter `https://your.IP.addr/` in your borwser, it will automatically generate a uuid and redirect you to your chatting room. For anyone want to join you, you can just share the url of your chatting room.
