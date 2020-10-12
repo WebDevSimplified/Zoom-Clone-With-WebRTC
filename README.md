@@ -11,7 +11,7 @@ sudo apt-get update
 
 # in case you don't have them
 sudo apt-get install curl
-sudo apt-get openssl
+sudo apt-get install openssl
 
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - # this is for 64 bit machine
 sudo apt-get install -y nodejs
