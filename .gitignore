@@ -1,1 +1,3 @@
 node_modules
+server-cert.pem
+server-key.pem

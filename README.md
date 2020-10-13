@@ -27,8 +27,9 @@ git clone https://github.com/WebDevSimplified/Zoom-Clone-With-WebRTC
 ```
 
 ## Certificate
-If you want to use this application via IP address or domain name instead of `localhost`, this step is necessary. Since most of browsers block media(such as webcam) accessing from unsecure connections, we have to deploy this application with https. Here are commands using `openssl` to generate a key and certificate.
+If you want to use this application via IP address or domain name instead of `localhost`, this step is necessary. Since most of browsers block media(such as webcam) accessing from unsecure connections, we have to deploy this application with `HTTPS`. Here are commands using `openssl` to generate a key and certificate.
 > For windows user, `openssl` is a built-in command in MINGW64 git-bash.
+> For Linux user, just run these commands in termial.
 ```bash
 # generate a key
 openssl genrsa -out server-key.pem
@@ -46,6 +47,6 @@ rm csr.pem
 
 ## Run it
 ```bash
-npm run devStart
+sudo npm run devStart
 ```
 And you can enter `https://your.IP.addr/` in your borwser, it will automatically generate a uuid and redirect you to your chatting room. For anyone want to join you, you can just share the url of your chatting room.
