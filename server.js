@@ -1,8 +1,14 @@
+const { v4: uuidV4 } = require('uuid')
 const express = require('express')
 const app = express()
-const server = require('http').Server(app)
-const io = require('socket.io')(server)
-const { v4: uuidV4 } = require('uuid')
+const fs = require('fs')
+const https = require('https')
+const options = {
+  key:fs.readFileSync('server-key.pem'),
+  cert: fs.readFileSync('server-cert.pem')
+}
+const httpsServer = https.createServer(options, app)
+const io = require('socket.io')(httpsServer)
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
@@ -26,4 +32,6 @@ io.on('connection', socket => {
   })
 })
 
-server.listen(3000)
+httpsServer.listen(443, function () {
+    console.log("Example app listening at https://%s:%s", httpsServer.address().address, httpsServer.address().port);
+  });
