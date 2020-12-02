@@ -1,11 +1,6 @@
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
-const myPeer = new Peer({
-  host: 'https://zoom-clone123.herokuapp.com/',
-  key:'peerjs',
-  secure:true,
-  port: 443
-})
+const myPeer = new Peer()
 const myVideo = document.createElement('video')
 myVideo.muted = true
 const peers = {}
