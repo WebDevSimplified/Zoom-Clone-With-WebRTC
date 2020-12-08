@@ -6,7 +6,7 @@ const { v4: uuidV4 } = require('uuid')
 const ssl = require('express-sslify')
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
-app.use(ssl.HTTPS())
+app.use(ssl.HTTPS({ trustProtoHeader: true }))
 app.get('/', (req, res) => {
   res.redirect(`/${uuidV4()}`)
 })
