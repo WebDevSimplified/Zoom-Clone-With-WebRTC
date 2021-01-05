@@ -1,10 +1,16 @@
 const express = require('express')
+const { ExpressPeerServer } = require('peer');
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
+const peerServer = ExpressPeerServer(server, {
+  debug: true
+});
 
 app.set('view engine', 'ejs')
+
+app.use('/peerjs', peerServer);
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
