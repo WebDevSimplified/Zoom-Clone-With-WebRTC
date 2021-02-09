@@ -1,31 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script>
-    const ROOM_ID = "<%= roomId %>"
-  </script>
   <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
   <script src="/socket.io/socket.io.js" defer></script>
   <script src="script.js" defer></script>
-  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script>
+    const ROOM_ID = "<%= roomId %>"
+    let vm = new Vue({
+      el: '#app',
+      data: { roomName: '', roomPassword: '', clients: 1 },
+
+    });
+  </script>
+  <title>room</title>
   <style>
     #video-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, 300px);
       grid-auto-rows: 300px;
     }
-    
+
     video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
+    .modal_wrap {
+      display: none;
+      width: 500px;
+      height: 500px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -250px 0 0 -250px;
+      background: #eee;
+      z-index: 2;
+    }
+
+    .black_bg {
+      display: none;
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .modal_close {
+      width: 26px;
+      height: 26px;
+      position: absolute;
+      top: -30px;
+      right: 0;
+    }
+
+    .modal_close>a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: url(https://img.icons8.com/metro/26/000000/close-window.png);
+      text-indent: -9999px;
+    }
   </style>
 </head>
+
 <body>
   <div id="video-grid"></div>
+  <div id="room_bg" class="modal_bg"></div>
+  <div id="room_wrap" class="modal_wrap">
+    <div id="room_close" class="modal_close"><a href="#">close</a></div>
+    <div id="app">
+      <form action="/room/">
+        이름<input type="text" v-model="roomName"> <br>
+        비밀번호<input type="password" v-model="roomPassword"><br>
+        방 인원<input type="number" v-model="clients"><br>
+        <button type="reset">취소</button><br>
+        <button type="submit">적용</button><br>
+      </form>
+    </div>
+  </div>
+  <div id="game_bg" class="black_bg"></div>
+  <div id="game_wrap" class="modal_wrap">
+    <div id="game_close" class="modal_close"><a href="#">close</a></div>
+    <div>
+      <li>게임 1</li>
+      <li>게임 2</li>
+    </div>
+  </div>
+  <button type='button' id="room_btn" class="btn btn-outline-dark">방설정</button>
+  <button id="videoButton">Video</button>
+  <button id="audioButton">Audio</button>
+  <button type="button" id="game_btn" class="btn btn-outline-dark" onclick="">술게임</button>
+  <a href="/room/exit/{{ROOM_ID}}"><button>Exit</button></a>
 </body>
+
 </html>
