@@ -19,6 +19,10 @@ navigator.mediaDevices.getUserMedia({
     call.on('stream', userVideoStream => {
       addVideoStream(video, userVideoStream)
     })
+    call.on("close", () => {
+        video.remove();
+    })
+    peers[call.peer] = call;
   })
 
   socket.on('user-connected', userId => {
